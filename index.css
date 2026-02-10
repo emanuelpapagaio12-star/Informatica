@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
+
+:root {
+    --accent: #00ff41;
+    /* Classic Matrix/Terminal Green */
+    --accent-glow: rgba(0, 255, 65, 0.3);
+    --bg-dark: #050505;
+    --bg-card: #0a0a0a;
+    --text-main: #e0e0e0;
+    --text-mute: #808080;
+    --border: #1a1a1a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: crosshair;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* Cyberpunk Grid Background */
+.grid-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(to right, rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4rem;
+}
+
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.nav {
+    position: absolute;
+    top: 2rem;
+    left: 4rem;
+    right: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-family: 'Syncopate', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.hero-main {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 4rem;
+}
+
+.hero-text h1 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.9;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.hero-text h1 span {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    color: var(--text-mute);
+    max-width: 500px;
+    margin-bottom: 3rem;
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+}
+
+.terminal-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.terminal-btn:hover {
+    background: var(--accent);
+    color: var(--bg-dark);
+    box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.hero-visual {
+    position: relative;
+}
+
+.image-frame {
+    position: relative;
+    padding: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+}
+
+.image-frame img {
+    width: 100%;
+    filter: sepia(100%) hue-rotate(90deg) brightness(0.8) contrast(1.2);
+    display: block;
+}
+
+.glitch-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 65, 0.1) 3px,
+            transparent 3px);
+    pointer-events: none;
+}
+
+.scanning-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 60%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 6rem 0;
+}
+
+.stat-item {
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.stat-label {
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+    .hero-main {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-text p {
+        margin: 0 auto 3rem;
+        border-left: none;
+        border-top: 2px solid var(--accent);
+        padding-top: 1.5rem;
+    }
+
+    .container {
+        padding: 0 2rem;
+    }
+}
