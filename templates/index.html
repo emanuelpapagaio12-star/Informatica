@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Master Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-container">
+        <header>
+            <h1>Task Master <span>Pro</span></h1>
+            <p>Gestiona tus objetivos con estilo.</p>
+        </header>
+
+        <section class="task-input">
+            <input type="text" id="taskTitle" placeholder="¿Qué tienes pendiente hoy?">
+            <button id="addTaskBtn">Añadir</button>
+        </section>
+
+        <ul id="taskList" class="task-list">
+            <!-- Tareas dinámicas aquí -->
+        </ul>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

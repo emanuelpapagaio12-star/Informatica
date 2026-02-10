@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encajadora Control Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>SISTEMA ENCAJADORA <span>v1.0</span></h1>
+            <div id="statusIndicator" class="indicator paused">PAUSADO</div>
+        </header>
+
+        <main class="grid-container">
+            <div class="card metric-card">
+                <h3>CAJAS / HORA</h3>
+                <div id="boxesCount" class="value">0</div>
+            </div>
+
+            <div class="card metric-card">
+                <h3>ERRORES / HORA</h3>
+                <div id="errorsCount" class="value error">0</div>
+            </div>
+
+            <div class="card control-card">
+                <h3>CONTROL DE MARCHA</h3>
+                <div class="btn-group">
+                    <button id="startBtn" class="btn btn-start">MARCHA</button>
+                    <button id="pauseBtn" class="btn btn-pause">PAUSA</button>
+                </div>
+            </div>
+
+            <div class="card simulation-card">
+                <h3>MODO SIMULACIÓN</h3>
+                <label class="switch">
+                    <input type="checkbox" id="simToggle">
+                    <span class="slider round"></span>
+                </label>
+                <p id="simStatus">Inactivo</p>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
