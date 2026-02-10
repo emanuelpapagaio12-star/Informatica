@@ -36,8 +36,8 @@ Una interfaz de usuario moderna y minimalista construida con **Next.js** para un
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/emanuelpapagaio12-star/Habilitat.git
-   cd Habilitat
+   git clone https://github.com/emanuelpapagaio12-star/Informatica.git
+   cd Informatica
    ```
 
 2. **Entorno Virtual (Opcional pero recomendado):**
@@ -95,7 +95,7 @@ Para iniciar el ecosistema completo, deberás ejecutar los servicios en terminal
 ## 🌐 GitHub Pages
 
 Puedes ver la documentación interactiva y el Roadmap del proyecto en:
-[https://emanuelpapagaio12-star.github.io/Habilitat/](https://emanuelpapagaio12-star.github.io/Habilitat/)
+[https://emanuelpapagaio12-star.github.io/Informatica/](https://emanuelpapagaio12-star.github.io/Informatica/)
 
 ---
 
