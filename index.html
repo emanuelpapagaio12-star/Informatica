@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informatica | Lector Pro</title>
+    <title>Informatica | Lector Pro Live</title>
     <link rel="stylesheet" href="index.css">
+    <!-- Incluir la librería QuaggaJS para el escaneo web -->
+    <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
 </head>
 
 <body>
@@ -20,11 +22,27 @@
         <section class="hero">
             <span class="badge">SISTEMA DE ESCANEO ACTIVO</span>
             <h1>El futuro del <br><span class="gradient">Escaneo Inteligente</span></h1>
-            <p class="hero-sub">Un sistema de visión artificial optimizado para la detección instantánea de activos
-                mediante códigos de barras y QR.</p>
-            <a href="https://github.com/emanuelpapagaio12-star/Informatica" class="btn-main">OBTENER CÓDIGO</a>
+            <p class="hero-sub">Experimenta la potencia de la visión artificial directamente en tu navegador.</p>
 
-            <div class="visual-container">
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem;">
+                <button id="start-btn" class="btn-main" style="border: none; cursor: pointer;">ACTIVAR CÁMARA</button>
+                <button id="stop-btn" class="btn-main"
+                    style="border: none; cursor: pointer; background: rgba(255,255,255,0.1); color: white; display: none;">DETENER</button>
+            </div>
+
+            <div id="scanner-wrapper" class="scanner-container">
+                <div id="interactive" class="viewport">
+                    <video id="video" autoplay playsinline></video>
+                </div>
+                <div class="scan-overlay"></div>
+            </div>
+
+            <div id="result-container" class="container" style="max-width: 640px; margin: 2rem auto;">
+                <div class="result-label">Código Detectado</div>
+                <div id="result-data">Esperando lectura...</div>
+            </div>
+
+            <div class="visual-container" id="hero-image-box">
                 <img src="barcode_reader_hero.png" alt="Nex Gen Scanner">
             </div>
         </section>
@@ -32,18 +50,92 @@
         <section class="grid-section">
             <div class="card">
                 <h3>Visión AI</h3>
-                <p>Implementación avanzada de OpenCV para procesamiento de imagen en tiempo real sin latencia.</p>
+                <p>Implementación avanzada de QuaggaJS para procesamiento de imagen en tiempo real en la web.</p>
             </div>
             <div class="card">
                 <h3>Universal</h3>
-                <p>Soporte binario completo para todos los estándares industriales de codificación de datos.</p>
+                <p>Soporte para EAN, Code 128, Code 39 y códigos QR mediante la cámara de tu dispositivo.</p>
             </div>
             <div class="card">
                 <h3>Open Source</h3>
-                <p>Arquitectura modular diseñada en Python para integración rápida en cualquier flujo de trabajo.</p>
+                <p>Complemento perfecto para tu script de Python, permitiendo una experiencia multiplataforma.</p>
             </div>
         </section>
     </div>
+
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const scannerWrapper = document.getElementById('scanner-wrapper');
+        const resultContainer = document.getElementById('result-container');
+        const resultData = document.getElementById('result-data');
+        const heroImageBox = document.getElementById('hero-image-box');
+
+        let isScanning = false;
+
+        startBtn.addEventListener('click', () => {
+            if (isScanning) return;
+
+            // Ocultar imagen hero y mostrar scanner
+            heroImageBox.style.display = 'none';
+            scannerWrapper.classList.add('active');
+            startBtn.style.display = 'none';
+            stopBtn.style.display = 'inline-block';
+
+            isScanning = true;
+
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#interactive'),
+                    constraints: {
+                        width: 640,
+                        height: 480,
+                        facingMode: "environment"
+                    },
+                },
+                decoder: {
+                    readers: [
+                        "code_128_reader",
+                        "ean_reader",
+                        "ean_8_reader",
+                        "code_39_reader",
+                        "upc_reader"
+                    ]
+                }
+            }, function (err) {
+                if (err) {
+                    console.error(err);
+                    alert("Error al iniciar la cámara: " + err);
+                    return;
+                }
+                Quagga.start();
+            });
+
+            Quagga.onDetected((data) => {
+                const code = data.codeResult.code;
+                resultData.innerText = code;
+                resultContainer.classList.add('active');
+
+                // Efecto visual de éxito
+                resultContainer.style.borderColor = "#10b981";
+                setTimeout(() => {
+                    resultContainer.style.borderColor = "rgba(16, 185, 129, 0.2)";
+                }, 500);
+            });
+        });
+
+        stopBtn.addEventListener('click', () => {
+            Quagga.stop();
+            isScanning = false;
+            scannerWrapper.classList.remove('active');
+            heroImageBox.style.display = 'block';
+            startBtn.style.display = 'inline-block';
+            stopBtn.style.display = 'none';
+            resultContainer.classList.remove('active');
+        });
+    </script>
 </body>
 
 </html>
