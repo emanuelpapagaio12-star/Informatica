@@ -1,0 +1,315 @@
+:root {
+    --bg-deep: #020617;
+    --card-bg: rgba(15, 23, 42, 0.8);
+    --primary: #22d3ee;
+    --primary-glow: rgba(34, 211, 238, 0.3);
+    --danger: #f43f5e;
+    --danger-glow: rgba(244, 63, 94, 0.3);
+    --success: #10b981;
+    --success-glow: rgba(16, 185, 129, 0.3);
+    --text-bright: #f8fafc;
+    --text-dim: #94a3b8;
+    --border: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    background-color: var(--bg-deep);
+    background-image:
+        linear-gradient(rgba(34, 211, 238, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--text-bright);
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    width: 100%;
+    max-width: 1000px;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100px;
+    height: 2px;
+    background: var(--primary);
+    box-shadow: 0 0 15px var(--primary);
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    background: linear-gradient(to right, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1 span {
+    font-size: 0.4em;
+    opacity: 0.5;
+    -webkit-text-fill-color: var(--text-dim);
+}
+
+.indicator {
+    padding: 0.6rem 2rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: 'Orbitron';
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 1px;
+}
+
+.indicator.running {
+    color: var(--success);
+    border: 1px solid var(--success);
+    background: var(--success-glow);
+    box-shadow: 0 0 20px var(--success-glow);
+    animation: pulse-success 2s infinite;
+}
+
+.indicator.paused {
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    background: var(--danger-glow);
+    box-shadow: 0 0 20px var(--danger-glow);
+}
+
+@keyframes pulse-success {
+    0% {
+        box-shadow: 0 0 10px var(--success-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 25px var(--success-glow);
+    }
+
+    100% {
+        box-shadow: 0 0 10px var(--success-glow);
+    }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.card:hover::before {
+    opacity: 0.8;
+}
+
+h3 {
+    margin: 0 0 1.5rem 0;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.value {
+    font-size: 5rem;
+    font-weight: 700;
+    font-family: 'Orbitron';
+    color: var(--primary);
+    text-shadow: 0 0 30px var(--primary-glow);
+    transition: 0.3s;
+}
+
+.value.error {
+    color: var(--danger);
+    text-shadow: 0 0 30px var(--danger-glow);
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 1rem;
+}
+
+.btn {
+    flex: 1;
+    padding: 1.2rem;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Orbitron';
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+.btn-start {
+    background: rgba(16, 185, 129, 0.05);
+    color: var(--success);
+    border-color: var(--success);
+}
+
+.btn-start:hover {
+    background: var(--success);
+    color: var(--bg-deep);
+    box-shadow: 0 0 40px var(--success-glow);
+    transform: scale(1.02);
+}
+
+.btn-pause {
+    background: rgba(244, 63, 94, 0.05);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.btn-pause:hover {
+    background: var(--danger);
+    color: var(--bg-deep);
+    box-shadow: 0 0 40px var(--danger-glow);
+    transform: scale(1.02);
+}
+
+.simulation-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#simStatus {
+    margin-top: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* Rediseño Switch Industrial */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0f172a;
+    transition: .4s;
+    border-radius: 40px;
+    border: 1px solid var(--border);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    left: 5px;
+    bottom: 4px;
+    background: linear-gradient(145deg, #e2e8f0, #94a3b8);
+    transition: .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+input:checked+.slider {
+    background-color: rgba(34, 211, 238, 0.15);
+    border-color: var(--primary);
+}
+
+input:checked+.slider:before {
+    transform: translateX(38px);
+    background: var(--primary);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    body {
+        padding: 1.5rem;
+    }
+
+    .value {
+        font-size: 4rem;
+    }
+}
