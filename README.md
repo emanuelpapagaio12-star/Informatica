@@ -23,6 +23,11 @@ Una interfaz de usuario moderna y minimalista construida con **Next.js** para un
 - **Ubicación:** `/zentask`
 - **Tecnología:** Next.js, React, Tailwind CSS, Lucide Icons.
 
+### 4. 🔍 Lector de Barra (Utility)
+Una práctica herramienta para el escaneo de códigos de barras y códigos QR en tiempo real.
+- **Ubicación:** `/lector_de_barra`
+- **Tecnología:** Python, OpenCV, PyZbar.
+
 ---
 
 ## 🛠️ Proceso de Instalación
@@ -53,6 +58,7 @@ Una interfaz de usuario moderna y minimalista construida con **Next.js** para un
    ```bash
    pip install -r requirements.txt
    pip install -r encajadora/requirements.txt
+   pip install -r lector_de_barra/requirements.txt
    ```
 
 ### Configuración del Frontend (ZenTask)
@@ -88,6 +94,12 @@ Para iniciar el ecosistema completo, deberás ejecutar los servicios en terminal
    ```bash
    cd zentask
    npm run dev
+   ```
+
+4. **Lector de Barra:**
+   ```bash
+   cd lector_de_barra
+   python barcode_reader.py
    ```
 
 ---
