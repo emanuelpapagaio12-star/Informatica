@@ -1,6 +1,3 @@
-<<<<<<< HEAD
 opencv-python
 pyzbar
-=======
 flask
->>>>>>> origin/main
